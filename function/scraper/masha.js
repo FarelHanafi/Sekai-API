@@ -4,14 +4,14 @@ const dotenv = require("dotenv");
 const jimp = require("jimp");
 const cheerio = require("cheerio");
 const fs = require("fs");
-const chalk = import('chalk');
+const chalk = import("chalk");
 const FormData = require("form-data");
 const { G4F } = require("g4f");
 const g4f = new G4F();
 const { tiktokdl } = require("tiktokdl");
-const { URL_REGEX } = require('@whiskeysockets/baileys')
-const { Pixiv } = require ( '@ibaraki-douji/pixivts')
-const pixiv = new Pixiv()
+const { URL_REGEX } = require("@whiskeysockets/baileys");
+const { Pixiv } = require("@ibaraki-douji/pixivts");
+const pixiv = new Pixiv();
 
 //Refresh
 let file = require.resolve(__filename);
@@ -308,15 +308,15 @@ exports.igstalk = (name) => {
         is_private,
       } = response.result.user_info;
       resolve({
-          username: username,
-          fullName: full_name,
-          photoUrl: profile_pic_url,
-          postsCount: posts,
-          followers: followers,
-          following: following,
-          bio: biography,
-          is_private: is_private,
-          is_verified: is_verified,
+        username: username,
+        fullName: full_name,
+        photoUrl: profile_pic_url,
+        postsCount: posts,
+        followers: followers,
+        following: following,
+        bio: biography,
+        is_private: is_private,
+        is_verified: is_verified,
       });
     } catch (e) {
       reject(new Error(`Error: ${e.message}`));
@@ -395,107 +395,127 @@ exports.styletext = (teks) => {
   });
 };
 
-exports.test = (number, type, message) => {
-  return new Promise((resolve, reject) => {
-    try {
-      const response = axios.post('http://basic-1.alstore.space:25583/send', {
-        number,
-        type,
-        message
-      });
-      resolve('Response:');
-    } catch (error) {
-      reject(error);
+exports.test = async function (jid, message) {
+  try {
+    const response = await axios.post(
+      "http://basic-1.alstore.space:25720/send-message",
+      {
+        jid,
+        message,
+      }
+    );
+
+    if (response.data.success) {
+      return "Message sent successfully";
+    } else {
+      return `Failed to send message: ${response.data.error}`;
     }
-  });
+  } catch (error) {
+    return `Error sending message:, ${error.message}`;
+  }
 };
 
-exports.nhentai = async function(q) {
-    try {
-        const response = await axios.get(`https://nhentai.net/g/${q}/`);
-        const html = response.data;
-        const $ = cheerio.load(html);
-        const pages = $('.thumb-container img').length; // Mendapatkan jumlah halaman
-        const imgSrcList = [];
+exports.nhentai = async function (q) {
+  try {
+    const response = await axios.get(`https://nhentai.net/g/${q}/`);
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const pages = $(".thumb-container img").length; // Mendapatkan jumlah halaman
+    const imgSrcList = [];
 
-        for (let i = 1; i <= pages; i++) {
-            const pageResponse = await axios.get(`https://nhentai.net/g/${q}/${i}/`);
-            const pageHtml = pageResponse.data;
-            const page$ = cheerio.load(pageHtml);
-            const imgSrc = page$('#image-container img').attr('src');
-            if (imgSrc) {
-                imgSrcList.push(imgSrc);
-            }
-        }
-
-        return imgSrcList;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-exports.simi = async function(text) {
-    try {
-      const response = await axios.post('https://api.simsimi.vn/v1/simtalk', new URLSearchParams({
-          text: text,
-          lc: 'id',
-          key: ''
-      }), {
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-          }
-      });
-  
-      const simi = response.data;
-      return simi.message;
-    } catch (error) {
-      console.error('errror wak', error);
-    }
-  }
-
-  exports.pixivdl = async function(query) {
-    if (query.match(URL_REGEX)) {
-      if (!/https:\/\/www.pixiv.net\/en\/artworks\/[0-9]+/i.test(query)) throw 'Invalid Pixiv Url'
-      query = query.replace(/\D/g, '')
-      let res = await pixiv.getIllustByID(query).catch(() => null)
-      if (!res) throw `ID "${query}" not found :/`
-      let media = []
-      for (let x = 0; x < res.urls.length; x++) media.push(await pixiv.download(new URL(res.urls[x].original)))
-      return {
-        artist: res.user.name, caption: res.title, tags: res.tags.tags.map(v => v.tag), media
-      }
-    } else {
-      let res = await pixiv.getIllustsByTag(query)
-      if (!res.length) throw `Tag's "${query}" not found :/`
-      res = res[~~(Math.random() * res.length)].id
-      res = await pixiv.getIllustByID(res)
-      let media = []
-      for (let x = 0; x < res.urls.length; x++) media.push(await pixiv.download(new URL(res.urls[x].original)))
-      return {
-        artist: res.user.name, caption: res.title, tags: res.tags.tags.map(v => v.tag), media
+    for (let i = 1; i <= pages; i++) {
+      const pageResponse = await axios.get(`https://nhentai.net/g/${q}/${i}/`);
+      const pageHtml = pageResponse.data;
+      const page$ = cheerio.load(pageHtml);
+      const imgSrc = page$("#image-container img").attr("src");
+      if (imgSrc) {
+        imgSrcList.push(imgSrc);
       }
     }
-  }
 
-  exports.quotesAnime = function() {
-    return new Promise((resolve, reject) => {
-        const page = Math.floor(Math.random() * 184)
-        axios.get('https://otakotaku.com/quote/feed/'+page)
-        .then(({ data }) => {
-            const $ = cheerio.load(data)
-            const hasil = []
-            $('div.kotodama-list').each(function(l, h) {
-                hasil.push({
-                    link: $(h).find('a').attr('href'),
-                    gambar: $(h).find('img').attr('data-src'),
-                    karakter: $(h).find('div.char-name').text().trim(),
-                    anime: $(h).find('div.anime-title').text().trim(),
-                    episode: $(h).find('div.meta').text(),
-                    up_at: $(h).find('small.meta').text(),
-                    quotes: $(h).find('div.quote').text().trim()
-                })
-            })
-            resolve(hasil)
-        }).catch(reject)
-    })
-}
+    return imgSrcList;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.simi = async function (text) {
+  try {
+    const response = await axios.post(
+      "https://api.simsimi.vn/v1/simtalk",
+      new URLSearchParams({
+        text: text,
+        lc: "id",
+        key: "",
+      }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    const simi = response.data;
+    return simi.message;
+  } catch (error) {
+    console.error("errror wak", error);
+  }
+};
+
+exports.pixivdl = async function (query) {
+  if (query.match(URL_REGEX)) {
+    if (!/https:\/\/www.pixiv.net\/en\/artworks\/[0-9]+/i.test(query))
+      throw "Invalid Pixiv Url";
+    query = query.replace(/\D/g, "");
+    let res = await pixiv.getIllustByID(query).catch(() => null);
+    if (!res) throw `ID "${query}" not found :/`;
+    let media = [];
+    for (let x = 0; x < res.urls.length; x++)
+      media.push(await pixiv.download(new URL(res.urls[x].original)));
+    return {
+      artist: res.user.name,
+      caption: res.title,
+      tags: res.tags.tags.map((v) => v.tag),
+      media,
+    };
+  } else {
+    let res = await pixiv.getIllustsByTag(query);
+    if (!res.length) throw `Tag's "${query}" not found :/`;
+    res = res[~~(Math.random() * res.length)].id;
+    res = await pixiv.getIllustByID(res);
+    let media = [];
+    for (let x = 0; x < res.urls.length; x++)
+      media.push(await pixiv.download(new URL(res.urls[x].original)));
+    return {
+      artist: res.user.name,
+      caption: res.title,
+      tags: res.tags.tags.map((v) => v.tag),
+      media,
+    };
+  }
+};
+
+exports.quotesAnime = function () {
+  return new Promise((resolve, reject) => {
+    const page = Math.floor(Math.random() * 184);
+    axios
+      .get("https://otakotaku.com/quote/feed/" + page)
+      .then(({ data }) => {
+        const $ = cheerio.load(data);
+        const hasil = [];
+        $("div.kotodama-list").each(function (l, h) {
+          hasil.push({
+            link: $(h).find("a").attr("href"),
+            gambar: $(h).find("img").attr("data-src"),
+            karakter: $(h).find("div.char-name").text().trim(),
+            anime: $(h).find("div.anime-title").text().trim(),
+            episode: $(h).find("div.meta").text(),
+            up_at: $(h).find("small.meta").text(),
+            quotes: $(h).find("div.quote").text().trim(),
+          });
+        });
+        resolve(hasil);
+      })
+      .catch(reject);
+  });
+};
