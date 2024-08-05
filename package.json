@@ -1,0 +1,40 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andzz",
+  "license": "ISC",
+  "dependencies": {
+    "@ibaraki-douji/pixivts": "^2.4.1",
+    "@siputzx/scraper": "^2.1.0",
+    "@types/node": "^18.0.6",
+    "@whiskeysockets/baileys": "^6.7.5",
+    "axios": "^0.21.4",
+    "betabotz-tools": "^0.0.7",
+    "cfonts": "^2.9.3",
+    "chalk": "^5.3.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.17.1",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security",
+    "g-i-s": "^2.1.7",
+    "g4f": "^1.4.6",
+    "jimp": "^0.16.13",
+    "mongoose": "^8.5.2",
+    "node-fetch": "^3.3.2",
+    "os": "^0.1.2",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "serve-favicon": "^2.5.0",
+    "ssl-express-www": "^1.0.1",
+    "tiktokdl": "^0.0.5"
+  }
+}

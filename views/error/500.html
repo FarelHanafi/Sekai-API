@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>500 Internal Server Error - Anime System Failure</title>
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #05050538;
+        border: 1px solid #00eeff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4px); /* Efek blur pada latar belakang */
+        -webkit-backdrop-filter: blur(
+          10px
+        ); /* Efek blur untuk browser WebKit */
+        transform: translateY(10%); /* Adjust vertical alignment */
+      }
+      .anime-girl {
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+        border-radius: 50%;
+        background-image: url("https://i.pinimg.com/736x/56/b3/72/56b372d4dc246b157b088911aeac3d92.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      h1 {
+        font-size: 36px;
+        color: #ffffff;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      p {
+        font-size: 18px;
+        color: #b8b8b8;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      p a {
+        text-decoration: none;
+        color: #337ab7;
+        text-align: center;
+      }
+      p a:hover {
+        color: #23527c;
+      }
+      /* Add this to make the video background work */
+      .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Add the video element as the background -->
+    <video class="video-background" autoplay loop muted>
+      <source src="../../galery/background.mp4" type="video/mp4" />
+    </video>
+    <div class="container">
+      <div class="anime-girl"></div>
+      <h1>500 Internal Server Error</h1>
+      <p>
+        It seems like our anime system has experienced a critical failure...
+        Don't worry, our team of skilled technicians is working hard to repair
+        the damage. In the meantime, you can try refreshing the page or
+        contacting our support team.
+      </p>
+      <p><a href="#">Try Again</a> or <a href="/contacts">Contact Support</a></p>
+    </div>
+  </body>
+</html>
