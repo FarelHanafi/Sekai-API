@@ -395,11 +395,12 @@ exports.styletext = (teks) => {
   });
 };
 
-exports.test = (number, message) => {
+exports.test = (number, type, message) => {
   return new Promise((resolve, reject) => {
     try {
       const response = axios.post('http://basic-1.alstore.space:25583/send', {
         number,
+        type,
         message
       });
       resolve('Response:');
