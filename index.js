@@ -57,6 +57,7 @@ app.get("/docs", (req, res) => {
 
 app.get("/whatsapp", async (req, res) => {
   let q = req.query.q;
+  let type = req.query.type;
   let msg = req.query.msg;
   if (!q)
     return res.json({
@@ -64,7 +65,7 @@ app.get("/whatsapp", async (req, res) => {
       creator: `${creator}`,
       message: "[!] masukan parameter q",
     });
-  let data = await masha.test(q, msg);
+  let data = await masha.test(q, type, msg);
   res.status(200).json({
     status: 200,
     creator: "Farel Hanafi",
