@@ -17,7 +17,7 @@ body::-webkit-scrollbar {
   width: 10px;
 }
 body::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f100;
 }
 body::-webkit-scrollbar-thumb {
   background: #888;
@@ -29,15 +29,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 body {
   overflow: auto;
-}
-
-/* Hide the scrollbar for Webkit browsers (Chrome, Safari) */
-::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide the scrollbar for Firefox */
-body {
   scrollbar-width: 0px; /* Firefox */
 }
 
@@ -299,7 +290,7 @@ section {
 }
 
 .home .home-content a:hover {
-  color:rgb(20, 220, 30);
+  color: rgb(20, 220, 30);
   background: rgba(
     255,
     255,
@@ -309,96 +300,98 @@ section {
   transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-.anime-footer {
-  display: inline-block;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  backdrop-filter: blur(10px); /* Blur effect */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for better visibility */
-  width: 100%;
-  z-index: 999;
-  padding: 10px 0;
-  font-family: "Ubuntu", sans-serif;
-  transition: all 0.3s ease;
-}
-
-.anime-footer .Infobawah {
-  /* Add a max-width to prevent the footer from taking up the full width */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px;
-  font-family: "Ubuntu", sans-serif;
-  transition: all 0.3s ease;
-  align-self: center;
-}
-
-.anime-footer .Infobawah h2 {
-  color: azure;
+.palakau {
+  display: block;
   text-align: center;
-  font-size: 40px;
+  margin: 20px 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.palakau h1 {
+  margin: 0;
+  font-size: 2em;
+  color: #ffffff;
 }
 
-.anime-footer .Infobawah ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.palakau p {
+  font-size: 1em;
+  color: #b0b0b0;
+}
+.mainmain {
+  width: 80%;
+  max-width: 1200px;
+}
+
+.mainmain .pricing-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 5px; /* reduced gap to 5px */
+  gap: 20px;
+  transform: translateX(10%); /* Adjust vertical alignment */
 }
 
-.anime-footer .Infobawah li {
+.mainmain .pricing-container .pricing-card {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid #3e3e4e;
+  border-radius: 8px;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  color: #ffffff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.mainmain .pricing-container .pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.mainmain .pricing-container .pricing-card h2 {
+  font-size: 1.5em;
   margin-bottom: 10px;
+}
+
+.mainmain .pricing-container .pricing-card .price {
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #ffffff;
+}
+
+.mainmain .pricing-container .pricing-card ul {
+  list-style-type: none;
   padding: 0;
-  flex-basis: 23%; /* adjusted flex-basis to 23% to fit 4 boxes */
-  transition: all 0.3s ease;
 }
 
-.anime-footer .Infobawah li:hover {
-  color:rgb(20, 220, 30);
-  background: rgba(
-    255,
-    255,
-    255,
-    0.2
-  ); /* Slightly darker background on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
+.mainmain .pricing-container .pricing-card ul li {
+  margin: 10px 0;
+  color: #00ff00;
 }
 
-.anime-footer .Infobawah a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid rgba(0, 243, 252, 0.3);
+.mainmain .pricing-container .pricing-card ul li a {
+  color: #ff0000;
+}
+
+.mainmain .pricing-container .pricing-card button {
+  background-color: #007bff;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.anime-footer .Infobawah a img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.mainmain .pricing-container .pricing-card button:hover {
+  background-color: #0056b3;
 }
 
-.anime-footer .Infobawah .member-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
+.mainmain .pricing-container .pricing-card .plans {
+  background-color: #51ff00;
 }
 
-.anime-footer .Infobawah .member-info span {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.anime-footer .Infobawah .member-info p {
-  font-size: 12px;
-  color: #ccc;
-  margin-bottom: 10px;
+.mainmain .pricing-container .pricing-card .plans:hover {
+  background-color: #51ff00;
 }
