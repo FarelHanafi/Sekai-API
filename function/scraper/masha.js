@@ -134,9 +134,8 @@ exports.tiktokdl = (url) => {
   });
 };
 
-exports.remini = async (imageBuffer, mode) => {
-  const modes = ["enhance", "dehaze", "recolor"];
-  mode = modes.includes(mode) ? mode : modes[0];
+exports.remini = async (imageBuffer) => {
+  mode = "enhance";
 
   const formData = new FormData();
   formData.append("mode", mode);
